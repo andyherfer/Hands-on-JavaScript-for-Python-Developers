@@ -22,8 +22,38 @@ window.onload = (() => {
           String concatenation
           Assignment
     */
-
-  })
+    switch (value) {
+      case "all-clear":
+        firstNumber = secondNumber = expression = 0
+        output.value = 0
+        break
+      case "+":
+      case "-":
+      case "/":
+      case "*":
+        operation = value
+        if (firstNumber !== 0) {
+          secondNumber = parseFloat(expression)
+          let result = operators[operation](firstNumber, secondNumber)
+          output.value = expression = result
+        } else {
+          firstNumber = parseFloat(expression)
+        }
+        expression = 0
+        break
+        case "=":
+          secondNumber = parseFloat(expression)
+          let result = operators[operation](firstNumber, secondNumber)
+          output.value = expression = result
+          firstNumber = secondNumber = 0
+          break
+        default:
+          expression += value
+          expression = parseFloat(expression)
+          output.value = expression
+          break
+        }
+    })
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].onclick = clickHandler
